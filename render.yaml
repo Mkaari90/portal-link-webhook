@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: portal-link-webhook
+    name: portal-link-command
     env: python
     plan: free
     buildCommand: "pip install -r requirements.txt"
