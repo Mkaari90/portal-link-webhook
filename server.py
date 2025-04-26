@@ -2,26 +2,16 @@ from fastapi import FastAPI, Request
 from pydantic import BaseModel
 from typing import List, Optional
 from google.cloud import firestore
+from google.oauth2 import service_account
 import os
-from dotenv import load_dotenv
-from pathlib import Path
+import json
 from fastapi.responses import JSONResponse
 import uuid
 
-# Load environment variables
-load_dotenv()
-
-# Set path to serviceAccountKey.json
-BASE_DIR = Path(__file__).resolve().parent.parent
-env_path = BASE_DIR / "serviceAccountKey.json"
-
-if not env_path.exists():
-    raise FileNotFoundError(f"serviceAccountKey.json not found at {env_path}")
-
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = str(env_path)
-
-# Initialize Firestore
-db = firestore.Client()
+# Initialize Firestore from environment variable
+credentials_info = json.loads(os.environ["GOOGLE_APPLICATION_CREDENTIALS_JSON"])
+credentials = service_account.Credentials.from_service_account_info(credentials_info)
+db = firestore.Client(credentials=credentials, project=credentials.project_id)
 commands_ref = db.collection("commands")
 
 # Create FastAPI app
