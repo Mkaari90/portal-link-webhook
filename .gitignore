@@ -1,1 +1,37 @@
+# Python
 __pycache__/
+*.py[cod]
+*.so
+
+# Logs and temp
+*.log
+*.tmp
+
+# Environment variables
+.env
+
+# Firebase/Google Cloud keys
+serviceAccountKey.json
+
+# Snapshots (backups)
+snapshots/
+
+# VSCode editor settings
+.vscode/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Build and distribution
+dist/
+build/
+
+# Node modules (if frontend appears later)
+node_modules/
+
+# Database files
+*.db
+
+# Render specific (just in case)
+render.yaml
